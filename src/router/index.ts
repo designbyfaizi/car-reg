@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import CarsView from '@/views/CarsView.vue';
+import { useAuthStore } from '@/stores/auth';
+// import { supabase } from '@/utils/supabase';
+
+// const {data, error} = await supabase.auth.getSession();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +13,14 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/cars',
+      name: 'cars',
+      component: CarsView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/about',
@@ -34,5 +47,21 @@ const router = createRouter({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore();
+  if (to.meta.requiresAuth) {
+    if (auth.isLoggedIn) {
+      next();
+    }
+    else {
+      alert("You need to log in");
+      next("/")
+    }
+  }
+  else {
+    next();
+  }
+})
 
 export default router;

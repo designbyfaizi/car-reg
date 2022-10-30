@@ -1,7 +1,89 @@
+<script setup lang="ts">
+import MainSection from '@/components/MainSection.vue';
+import InputMain from '@/components/InputMain.vue';
+import ButtonMain from '@/components/ButtonMain.vue';
+import AlertMain from '@/components/AlertMain.vue';
+
+import { ref } from 'vue';
+import { supabase } from '@/utils/supabase';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const fullName = ref('');
+const email = ref('');
+const password = ref('');
+const loading = ref(false);
+const errorMessage = ref('');
+
+const clearAlerts = () => {
+  errorMessage.value = '';
+};
+
+const handleSignUp = async () => {
+  console.log('Sign Up Process Starts :D');
+  clearAlerts();
+  try {
+    loading.value = true;
+    const { data, error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: {
+        data: {
+          fullName: fullName.value
+        }
+      }
+    });
+
+    if (error) {
+      throw error;
+    }
+    console.log({ data, router });
+  } catch (err: any) {
+    console.error(err.message);
+    errorMessage.value = err.message;
+  } finally {
+    loading.value = false;
+  }
+};
+</script>
+
 <template>
-  <h1>Sign Up Page</h1>
+  <MainSection>
+    <h1 class="text-[#11181c] text-4xl">Sign Up</h1>
+    <h2 class="text-[#11181c] text-2xl text-teal-600">CarReg</h2>
+    <form
+      @submit.prevent="handleSignUp"
+      class="signUpForm flex flex-col gap-2 my-4"
+    >
+      <InputMain
+        required
+        type="text"
+        label="Full Name"
+        name="fullName"
+        :value="fullName"
+        @input="(event) => (fullName = event.target.value)"
+      />
+      <InputMain
+        required
+        type="text"
+        label="Email"
+        name="email"
+        :value="email"
+        @input="(event) => (email = event.target.value)"
+      />
+      <InputMain
+        required
+        type="password"
+        label="Password"
+        name="password"
+        :value="password"
+        @input="(event) => (password = event.target.value)"
+      />
+
+      <ButtonMain label="Sign Up" type="submit" :loading="loading" />
+      <AlertMain type="error" :message="errorMessage" />
+    </form>
+    <p>Already Have an Account? <RouterLink to="/login">Login</RouterLink></p>
+  </MainSection>
 </template>
-
-<script setup lang="ts"></script>
-
-<style scoped></style>

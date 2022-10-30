@@ -1,26 +1,38 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import { useCounterStore } from '@/stores/counter';
 import Navbar from '@/components/Navbar/NavbarComponent.vue';
 
-const counter = useCounterStore();
+import { RouterView, useRouter } from 'vue-router';
+import { supabase } from '@/utils/supabase';
+import { onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+const auth = useAuthStore();
+
+
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    const { session } = data;
+    const { user } = session;
+    auth.setSession(session);
+    auth.setUser(user);
+  });
+
+  supabase.auth.onAuthStateChanged((_, _session) => {
+    // console.log({_session})
+    // auth.setSession(_session);
+    // auth.setUser(_session.user);
+  });
+});
+// import { useCounterStore } from '@/stores/counter';
+// const counter = useCounterStore();
 </script>
 
 <template>
   <div class="p-4 bg-light-700 min-h-screen">
     <Navbar />
-    <main class="container mx-auto">
+    <main class="container mx-auto max-w-screen-lg">
       <RouterView />
+      <!-- <p>User: {{ auth?.accessToken }}</p> -->
     </main>
-    <!-- <header class="">Header</header>
-    <RouterView />
-    <h2>Count</h2>
-    <h3>{{ counter.count }}</h3>
-    <button @click="() => counter.increment()">Increment</button>
-    <button @click="() => counter.decrement()">Decrement</button>
-
-    <h3>Double : {{counter.doubleCount}}</h3>
-    <h3>Squared : {{counter.squaredCount}}</h3> -->
   </div>
 </template>
 

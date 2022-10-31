@@ -15,9 +15,17 @@ const email = ref('');
 const password = ref('');
 const loading = ref(false);
 const errorMessage = ref('');
+const successMessage = ref('');
 
 const clearAlerts = () => {
   errorMessage.value = '';
+  successMessage.value = '';
+};
+
+const clearInputs = () => {
+  fullName.value = '';
+  email.value = '';
+  password.value = '';
 };
 
 const handleSignUp = async () => {
@@ -39,6 +47,10 @@ const handleSignUp = async () => {
       throw error;
     }
     console.log({ data, router });
+    if (data.user) {
+      clearInputs();
+      successMessage.value = 'Success: Check your email, or proceed to Login';
+    }
   } catch (err: any) {
     console.error(err.message);
     errorMessage.value = err.message;
@@ -88,6 +100,7 @@ const handleSignUp = async () => {
         class="my-4"
       />
       <AlertMain type="error" :message="errorMessage" />
+      <AlertMain type="success" :message="successMessage" />
     </form>
     <p>
       Already Have an Account?

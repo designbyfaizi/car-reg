@@ -50,7 +50,9 @@ const handleLogout = async () => {
         v-if="!auth.isLoggedIn"
         to="/signup"
         name="Sign Up"
-        class="!bg-light-900 !text-dark-700 !rounded-xl"
+        :class="`!text-dark-700 !rounded-xl ${
+          $route.path == '/signup' ? '!bg-light-900/100' : '!bg-light-900/40'
+        }`"
       />
       <NavLink v-if="auth.isLoggedIn" to="/my-vehicles" name="My Vehicles" />
       <ButtonMain

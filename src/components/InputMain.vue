@@ -26,7 +26,7 @@ const props = defineProps({
       v-bind="$attrs"
       :value="props.value"
       @input="(event) => $emit('input', event)"
-      class="bg-dark-100 text-2xl p-3 border-none outline-none ring-3 ring-light-900/40 focus:ring-light-900/70 text-light-900 rounded-lg"
+      class="bg-dark-100 hover:bg-dark-50 focus:bg-dark-50 text-2xl p-3 border-none outline-none ring-2 ring-light-900/40 focus:ring-light-900/70 text-light-900 rounded-lg"
     />
   </div>
 </template>

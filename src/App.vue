@@ -7,6 +7,7 @@ import { useAuthStore } from '@/stores/auth';
 const auth = useAuthStore();
 
 onMounted(() => {
+  console.log('Main onMounted!!!');
   supabase.auth.getSession().then(({ data }) => {
     const { session } = data;
     const { user } = session;
@@ -14,7 +15,10 @@ onMounted(() => {
     auth.setUser(user);
   });
 
-  supabase.auth.onAuthStateChanged((_, _session) => {
+  supabase.auth.onAuthStateChange((_, _session) => {
+    if (_ == 'SIGNED_OUT') {
+      return;
+    }
     console.log({ _session });
     auth.setSession(_session);
     auth.setUser(_session.user);

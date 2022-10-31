@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import MyVehiclesView from '@/views/MyVehiclesView.vue';
 import { useAuthStore } from '@/stores/auth';
 // import { supabase } from '@/utils/supabase';
 
@@ -22,6 +23,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/categories',
+      name: 'categories',
+      component: () => import('../views/CategoriesView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/add-vehicle',
       name: 'add-vehicle',
       component: () => import('../views/AddVehicleView.vue'),
@@ -30,9 +39,17 @@ const router = createRouter({
       }
     },
     {
+      path: '/add-category',
+      name: 'add-category',
+      component: () => import('../views/AddCategoryView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/my-vehicles',
       name: 'my-vehicles',
-      component: () => import('../views/MyVehiclesView.vue'),
+      component: MyVehiclesView,
       meta: {
         requiresAuth: true
       }

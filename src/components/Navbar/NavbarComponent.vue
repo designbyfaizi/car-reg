@@ -42,6 +42,7 @@ const handleLogout = async () => {
     <NavItems>
       <NavLink to="/" name="Home" />
       <NavLink v-if="auth.isLoggedIn" to="/vehicles" name="Vehicles" />
+      <NavLink v-if="auth.isLoggedIn" to="/categories" name="Categories" />
       <NavLink to="/about" name="About" />
     </NavItems>
     <NavItems>

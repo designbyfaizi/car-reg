@@ -5,6 +5,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  selectedOption: {
+    type: String,
+    default: ''
+  },
   options: {
     type: Array,
     default: () => []
@@ -21,7 +25,7 @@ const props = defineProps({
     >
       <option disabled value="">Please select an option</option>
       <option v-for="(option, index) in props.options" :key="index">
-        {{ option }}
+        {{ option.name }}
       </option>
     </select>
   </div>

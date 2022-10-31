@@ -10,6 +10,10 @@ import MainSection from '@/components/MainSection.vue';
     </div>
     <p class="text-xl flex flex-col gap-4 my-4">
       <span>
+        Car-Reg (Car Registration) is a small task given to me by Ropstam. It
+        involves some basic CRUD operations related to cars and users.
+      </span>
+      <span>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Purus gravida quis
         blandit turpis. Augue neque gravida in fermentum et sollicitudin ac

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import MainSection from '@/components/MainSection.vue';
 import ButtonMain from '@/components/ButtonMain.vue';
 import TooltipMain from '@/components/TooltipMain.vue';
@@ -9,6 +10,7 @@ console.log('isLoggedIn: ', auth.isLoggedIn);
 const loggedInMessage =
   'You are logged in. You can view all cars and list your cars as well.';
 const loggedOutMessage = 'You need an account to view and list your cars.';
+
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import CarsView from '@/views/CarsView.vue';
 import { useAuthStore } from '@/stores/auth';
 // import { supabase } from '@/utils/supabase';
 
@@ -15,9 +14,25 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/cars',
-      name: 'cars',
-      component: CarsView,
+      path: '/vehicles',
+      name: 'vehicles',
+      component: () => import('../views/VehiclesView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/add-vehicle',
+      name: 'add-vehicle',
+      component: () => import('../views/AddVehicleView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/my-vehicles',
+      name: 'my-vehicles',
+      component: () => import('../views/MyVehiclesView.vue'),
       meta: {
         requiresAuth: true
       }
@@ -33,12 +48,18 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('../views/SignUpView.vue')
+      component: () => import('../views/SignUpView.vue'),
+      meta: {
+        requiresLogOut: true
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/LoginView.vue'),
+      meta: {
+        requiresLogOut: true
+      }
     },
     {
       path: '/:pathMatch(.*)*',
@@ -56,6 +77,15 @@ router.beforeEach((to, from, next) => {
     }
     else {
       alert("You need to log in");
+      next("/")
+    }
+  }
+  else if (to.meta.requiresLogOut) {
+    if (!auth.isLoggedIn) {
+      next();
+    }
+    else {
+      alert("You need to logout first");
       next("/")
     }
   }

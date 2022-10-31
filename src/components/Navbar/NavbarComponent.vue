@@ -1,26 +1,36 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import NavItems from './NavItems.vue';
 import NavLink from '@/components/Navbar/NavLink.vue';
 import ButtonMain from '@/components/ButtonMain.vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 import { useAuthStore } from '@/stores/auth';
 const auth = useAuthStore();
+const router = useRouter();
+const loading = ref(false);
 
-const handleLogout = () => {
-  console.log({ isLoggedIn: auth.isLoggedIn.value });
+const handleLogout = async () => {
   console.log('Logging Out');
-  auth.logOut();
+  loading.value = true;
+  try {
+    await auth.logOut();
+    router.push('/');
+  } catch (error) {
+    console.error(error``);
+  } finally {
+    loading.value = false;
+  }
 };
 </script>
 
 <template>
   <header
-    class="sticky top-4 h-[100px] bg-light-50 bg-opacity-60 backdrop-blur-lg container mx-auto max-w-screen-lg p-4 rounded-xl flex justify-between items-center border-1 border-teal-600"
+    class="sticky top-4 h-[100px] bg-dark-500 bg-opacity-80 backdrop-blur-md container mx-auto max-w-screen-lg p-4 rounded-xl flex justify-between items-center ring-2 ring-black/50"
   >
     <RouterLink
       to="/"
-      class="flex items-center no-underline hover:scale-105 active:scale-95 transition-all duration-125 ease-in-out"
+      class="flex items-center no-underline hover:scale-101 active:scale-99 transition-all duration-125 ease-in-out"
     >
       <img
         src="@/assets/logo.svg"
@@ -31,7 +41,7 @@ const handleLogout = () => {
     </RouterLink>
     <NavItems>
       <NavLink to="/" name="Home" />
-      <NavLink v-if="auth.isLoggedIn" to="/cars" name="Cars" />
+      <NavLink v-if="auth.isLoggedIn" to="/vehicles" name="Vehicles" />
       <NavLink to="/about" name="About" />
     </NavItems>
     <NavItems>
@@ -40,11 +50,13 @@ const handleLogout = () => {
         v-if="!auth.isLoggedIn"
         to="/signup"
         name="Sign Up"
-        class="!bg-teal-700 !text-teal-100 !rounded-xl"
+        class="!bg-light-900 !text-dark-700 !rounded-xl"
       />
+      <NavLink v-if="auth.isLoggedIn" to="/my-vehicles" name="My Vehicles" />
       <ButtonMain
         v-if="auth.isLoggedIn"
         label="Logout"
+        :loading="loading"
         class="!bg-red-600 !text-red-2 hover:!bg-red-500 focus:!ring-red-300"
         @click="handleLogout()"
       />

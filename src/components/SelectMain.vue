@@ -1,20 +1,13 @@
 <script setup lang="ts">
-// interface TextInputProps {
-//   type: 'text' | 'number' | 'password';
-//   name: string;
-//   label?: string;
-//   value: any;
-// }
-// const props = defineProps<TextInputProps>();
-
+import { ref } from 'vue';
 const props = defineProps({
   label: {
     type: String,
     default: ''
   },
-  value: {
-    type: [String, Number],
-    default: ''
+  options: {
+    type: Array,
+    default: () => []
   }
 });
 </script>
@@ -22,11 +15,14 @@ const props = defineProps({
 <template>
   <div class="flex flex-col gap-2">
     <label :for="props.name">{{ props.label }}</label>
-    <input
+    <select
       v-bind="$attrs"
-      :value="props.value"
-      @input="(event) => $emit('input', event)"
       class="bg-dark-100 text-2xl p-3 border-none outline-none ring-3 ring-light-900/40 focus:ring-light-900/70 text-light-900 rounded-lg"
-    />
+    >
+      <option disabled value="">Please select an option</option>
+      <option v-for="(option, index) in props.options" :key="index">
+        {{ option }}
+      </option>
+    </select>
   </div>
 </template>

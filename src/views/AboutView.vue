@@ -5,10 +5,10 @@ import MainSection from '@/components/MainSection.vue';
 <template>
   <MainSection>
     <div class="flex items-baseline gap-2">
-      <h1 class="text-[#11181c] text-4xl">About</h1>
-      <h2 class="text-[#11181c] text-2xl text-teal-600">CarReg</h2>
+      <h1 class="text-light-200 text-4xl">About</h1>
+      <h2 class="text-2xl text-teal-500">CarReg</h2>
     </div>
-    <p class="text-xl text-gray-700 flex flex-col gap-4 my-4">
+    <p class="text-xl flex flex-col gap-4 my-4">
       <span>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Purus gravida quis

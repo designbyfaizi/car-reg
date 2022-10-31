@@ -50,11 +50,11 @@ const handleSignUp = async () => {
 
 <template>
   <MainSection>
-    <h1 class="text-[#11181c] text-4xl">Sign Up</h1>
-    <h2 class="text-[#11181c] text-2xl text-teal-600">CarReg</h2>
+    <h1 class="text-4xl">Sign Up</h1>
+    <h2 class="text-2xl text-teal-500">CarReg</h2>
     <form
       @submit.prevent="handleSignUp"
-      class="signUpForm flex flex-col gap-2 my-4"
+      class="signUpForm flex flex-col gap-3 my-4"
     >
       <InputMain
         required
@@ -81,9 +81,17 @@ const handleSignUp = async () => {
         @input="(event) => (password = event.target.value)"
       />
 
-      <ButtonMain label="Sign Up" type="submit" :loading="loading" />
+      <ButtonMain
+        label="Sign Up"
+        type="submit"
+        :loading="loading"
+        class="my-4"
+      />
       <AlertMain type="error" :message="errorMessage" />
     </form>
-    <p>Already Have an Account? <RouterLink to="/login">Login</RouterLink></p>
+    <p>
+      Already Have an Account?
+      <RouterLink to="/login" class="text-teal-500">Login</RouterLink>
+    </p>
   </MainSection>
 </template>

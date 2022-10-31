@@ -18,7 +18,7 @@ const nonActiveClasses = 'bg-teal-200 text-teal-500';
 <template>
   <button
     v-bind="$attrs"
-    :class="`text-2xl font-medium p-3 my-4 border-none rounded-lg ${
+    :class="`text-2xl font-medium p-3 border-none rounded-lg ${
       props.loading ? nonActiveClasses : activeClasses
     }`"
     :disabled="props.loading"

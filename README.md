@@ -2,6 +2,8 @@
 
 Car-Reg is a web app that was built to complete the task given to me by Ropstam. The app is built in Vue3 and uses Supabase to implement authentication functionalities. The auth details such as access token and user details are stored in Pinia which is a modern Vuex and Redux alternative for Vue JS.
 
+The latest build of Car-Reg is ready to be tested and has been deployed on <a href="https://car-reg.vercel.app" target="_blank">Vercel</a>
+
 ## Features
 
 1. Sign Up
@@ -13,6 +15,7 @@ Car-Reg is a web app that was built to complete the task given to me by Ropstam.
 1. View Categories
 
 ### Features Left
+
 1. Update Vehicle
 1. Delete Vehicle
 
@@ -25,6 +28,7 @@ Following technologies were used in this app.
 1.  Unocss<span style="color: rgba(20, 184, 166)"> (Styling)</span>
 1.  Pinia<span style="color: rgba(20, 184, 166)"> (State Management)</span>
 1.  Supabase<span style="color: rgba(20, 184, 166)"> (Authentication & Database)</span>
+
 ## Project Setup
 
 ```sh

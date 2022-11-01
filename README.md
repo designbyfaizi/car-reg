@@ -1,7 +1,6 @@
 # car-reg
 
 Car-Reg is a web app that was built to complete the task given to me by Ropstam. The app is built in Vue3 and uses Supabase to implement authentication functionalities. The auth details such as access token and user details are stored in Pinia which is a modern Vuex and Redux alternative for Vue JS.
-This template should help get you started developing with Vue 3 in Vite.
 
 ## Features
 

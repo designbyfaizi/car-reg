@@ -9,12 +9,8 @@ const props = defineProps({
 
 const hovered = ref(false);
 
-const setHovered = (boolean) => {
+const setHovered = (boolean: boolean) => {
   hovered.value = boolean;
-};
-
-const print = (event) => {
-  console.log(event);
 };
 </script>
 

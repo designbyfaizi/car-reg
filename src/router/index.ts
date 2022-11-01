@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from '@/views/HomeView.vue';
+import AboutView from '@/views/AboutView.vue';
 import MyVehiclesView from '@/views/MyVehiclesView.vue';
+import VehiclesView from '@/views/VehiclesView.vue';
+import VehicleDetailsView from '@/views/VehicleDetailsView.vue';
+import CategoriesView from '@/views/CategoriesView.vue';
+import AddCategoryView from '@/views/AddCategoryView.vue';
+import AddVehicleView from '@/views/AddVehicleView.vue';
+import LoginView from '@/views/LoginView.vue';
+import SignUpView from '@/views/SignUpView.vue';
+import ErrorView from '@/views/ErrorView.vue';
 import { useAuthStore } from '@/stores/auth';
-// import { supabase } from '@/utils/supabase';
-
-// const {data, error} = await supabase.auth.getSession();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +23,15 @@ const router = createRouter({
     {
       path: '/vehicles',
       name: 'vehicles',
-      component: () => import('../views/VehiclesView.vue'),
+      component: VehiclesView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/vehicles/:registrationNumber',
+      name: 'vehicle-details',
+      component: VehicleDetailsView,
       meta: {
         requiresAuth: true
       }
@@ -25,7 +39,7 @@ const router = createRouter({
     {
       path: '/categories',
       name: 'categories',
-      component: () => import('../views/CategoriesView.vue'),
+      component: CategoriesView,
       meta: {
         requiresAuth: true
       }
@@ -33,7 +47,7 @@ const router = createRouter({
     {
       path: '/add-vehicle',
       name: 'add-vehicle',
-      component: () => import('../views/AddVehicleView.vue'),
+      component: AddVehicleView,
       meta: {
         requiresAuth: true
       }
@@ -41,7 +55,7 @@ const router = createRouter({
     {
       path: '/add-category',
       name: 'add-category',
-      component: () => import('../views/AddCategoryView.vue'),
+      component: AddCategoryView,
       meta: {
         requiresAuth: true
       }
@@ -60,12 +74,12 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: AboutView
     },
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('../views/SignUpView.vue'),
+      component: SignUpView,
       meta: {
         requiresLogOut: true
       }
@@ -73,7 +87,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue'),
+      component: LoginView,
       meta: {
         requiresLogOut: true
       }
@@ -81,7 +95,7 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: '404',
-      component: () => import('../views/ErrorView.vue')
+      component: ErrorView
     }
   ]
 });

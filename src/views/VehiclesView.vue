@@ -36,7 +36,7 @@ fetchAllVehicles()
         {{ loading ? 'Loading...' : 'No vehicle Added yet.' }}
       </h1>
       <div v-else>
-        <DataTable :data="vehicles" />
+        <DataTable :data="vehicles" enableClick />
       </div>
     </div>
     <TooltipMain class="ml-auto" label="Add Vehicle">

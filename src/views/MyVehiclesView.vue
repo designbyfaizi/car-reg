@@ -37,7 +37,7 @@ fetchMyVehicles({ email: auth.user?.email })
         {{ loading ? 'Loading...' : 'No vehicle Added yet. Add Now' }}
       </h1>
       <div v-else>
-        <DataTable :data="myVehicles" />
+        <DataTable :data="myVehicles" enableClick />
         <!-- <h1 v-for="(vehicle, index) in myVehicles" :key="index">
           {{ vehicle.make }}
         </h1> -->

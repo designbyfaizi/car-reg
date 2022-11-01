@@ -1,5 +1,22 @@
 import { supabase } from "./supabase";
 
+export const fetchSingleVehicle = async ({ registrationNumber }: { registrationNumber: string | number }) => {
+  try {
+    console.log({ registrationNumber })
+    let { data, error } = await supabase
+      .from('vehicle')
+      .select('category, make, model, registrationNumber, user').eq('registrationNumber', registrationNumber)
+    if (error) throw error;
+    console.log(data)
+    return { data, error }
+
+  }
+  catch (error: any) {
+    console.error(error);
+    return { data: null, error }
+  }
+}
+
 export const fetchMyVehicles = async ({ email }: { email: string }) => {
   try {
     console.log({ email })
